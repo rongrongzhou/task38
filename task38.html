@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>task38</title>
+<link rel="stylesheet" type="text/css" href="task38.css"/>
+</head>
+
+<body>
+<table>
+<thead>
+<th>姓名</th>
+<th id="ch" onClick="order(this)">语文</th>
+<th id="ma" onClick="order(this)">数学</th>
+<th id="eg" onClick="order(this)">英语</th>
+<th id="total" onClick="order(this)">总分</th>
+</thead>
+<tbody>
+</tbody>
+</table>
+<input type="button" value="加载数据" onClick="loaddata()"/>
+<script type="text/javascript" language="javascript">
+var data = [
+	{"姓名":"小明","语文":80,"数学":90,"英语":70},
+	{"姓名":"小红","语文":90,"数学":60,"英语":90},
+	{"姓名":"小亮","语文":70,"数学":100,"英语":80},
+	{"姓名":"小刚","语文":60,"数学":70,"英语":70}
+	];
+	//创建表格
+		var l=data.length;
+		var tbody=document.getElementsByTagName("tbody")[0];
+		var td=[];
+		var tr=[];
+		var total=[];
+		for (var i=0;i<l;i++)
+		{
+			tr[i]=document.createElement("tr");
+			for (var j=0;j<=4;j++)
+			{
+				td[j]=document.createElement("td");
+				tr[i].appendChild(td[j]);
+				}
+			    tbody.appendChild(tr[i]);
+				}
+		//计算总分
+		var row=document.getElementsByTagName("tr");
+		
+		//加载数据
+		function loaddata(){
+			
+			for (var q=1;q<row.length;q++)
+			{
+			
+				row[q].cells[0].innerHTML=data[q-1]["姓名"];
+				row[q].cells[1].innerHTML=data[q-1]["语文"];
+				row[q].cells[2].innerHTML=data[q-1]["数学"];
+				row[q].cells[3].innerHTML=data[q-1]["英语"];
+				data[q-1]["总分"]=parseInt(data[q-1]["语文"])+parseInt(data[q-1]["数学"])+parseInt(data[q-1]["英语"]);
+				row[q].cells[4].innerHTML=data[q-1]["总分"];
+				
+				}
+		}
+				//排序
+			function order(x){
+			var subject = x.innerHTML;
+			var Score = [];
+			for (var i=0;i<data.length;i++){
+				Score[i] = parseInt(data[i][subject]);
+			}
+
+			for (var i=0;i<Score.length;i++){
+				for (var j=i;j<Score.length;j++){
+					if (Score[i]<Score[j]){
+
+						var temp = data[i];
+						data[i] = data[j];
+						data[j] = temp;
+						
+						var temp1 = Score[i];
+						Score[i]  = Score[j];
+						Score[j]  = temp1;
+
+					}
+				}
+			}
+
+			loaddata();
+		}
+			
+
+</script>
+</body>
+</html>

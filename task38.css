@@ -1,0 +1,6 @@
+@charset "utf-8";
+/* CSS Document */
+table,td,tr{border:1px solid #0D0B0B;
+border-collapse:collapse;}
+.table_header{background-color:#B1AAAA;
+color:write;}
